@@ -1,0 +1,288 @@
+*, *::after, *::before { 
+    box-sizing: border-box; /*using borderbox box sizing makes is much easier to size items */
+    font-family: cursive, sans-serif;
+ 
+ }
+/*to choose and target everything onthe project */
+body {
+    background: linear-gradient(to bottom, orange, rgb(30, 63, 183));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+
+}
+.clock {
+    width: 400px;
+    height: 400px;
+    background-color: rgb(239, 231, 231);
+    border-radius: 50%;
+    border: 3px solid rgb(218, 218, 218);
+    position: relative;
+    box-shadow:10px 10px 10px 10px rgba(54, 52, 52, 0.75);
+    
+}
+/* now we need to positiong all numbers into circle*/
+.clock .number {
+    position: absolute;
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    /* trick to make numbers rotation arond the clock easy to visualise*/
+    /*background-color: red; adding backgrond colour helps to see all numbers stacked on*/
+    text-align: center;
+    /*transform: rotate(30deg); */
+    /* to have all the numbers rotating we need create a variable>>> --rotation:0; */
+    --rotation: 0;
+    transform: rotate(var(--rotation));
+    font-size: 1.5rem;
+}
+.clock .number1 { --rotation: 30deg; } /* when you do this it will rotate number1 element by 30deg round the clock >> so we need to apply this to other numbers in sequence so the numbers will position like clock */
+.clock .number2 { --rotation: 60deg; }
+.clock .number3 { --rotation: 90deg; }
+.clock .number4 { --rotation: 120deg; }
+.clock .number5 { --rotation: 150deg; }
+.clock .number6 { --rotation: 180deg; }
+.clock .number7 { --rotation: 210deg; }
+.clock .number8 { --rotation: 240deg; }
+.clock .number9 { --rotation: 270deg; }
+.clock .number10 { --rotation: 300deg; }
+.clock .number11 { --rotation: 330deg; }
+/*.clock .number12 { --rotation: 360deg; } you dont need to worry about 12 as it is positined default */
+
+/* this is all with number positioning.
+/* now time to add hands of clock */
+
+.clock .hand {
+    --rotation: 0;
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    width: 10px;
+    height: 40%;
+    background-color: rgb(0, 0, 0);
+    border: 1px solid white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* hand offset 12 so we need to fix this */
+    transform-origin: bottom;
+    transform: translateX(-50%) rotate(calc(var(--rotation) * 1deg)); /* make sure calc to convert that 1 value to degree . this is last bit decides how it rotates*/
+    z-index: 10; /* to keep this hand at the top since it has absolute property*/
+}
+.clock .minute {
+    width: 7px;
+    height: 40%;
+    background-color: rgb(0, 0, 0);
+
+}
+.clock .hour {
+    width: 10px;
+    height: 35%;
+    background-color: rgb(0, 0, 0);
+}
+.clock .second {
+    width: 3px;
+    height: 44%;
+    background-color: rgb(255, 0, 0);
+}
+/*we can use pseudo state */
+
+.clock::after {
+    content: ''; /* this is to create a content after clock div and put the black dot */
+    position: absolute;
+    background-color: black;
+    z-index: 11;
+    width:15px;
+    height: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+
+}
+/*am-pm" "date*/
+.am-pm {
+    position: absolute;
+    display: flex;
+    background-color: rgb(232, 19, 189);
+    justify-content: center;
+    align-items: center;
+    top: 20%;
+    left: 44%;
+    border: 2px solid black;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    
+}
+.date {   
+    background-color: rgb(245, 5, 5);
+    display: flex;
+    justify-content: center; 
+    position: absolute;
+    font-size: 1.3em;
+    color: black;
+    align-items: center;
+    top: 70%;
+    left: 42%;
+    border: 2px solid black;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    
+}
+.day {
+    background-color: rgb(239, 236, 207);
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3em;
+    color: black;
+    align-items: center;
+    top: 46%;
+    left: 70%;
+    border: 2px solid rgb(255, 0, 0);
+    
+    border-radius: 10%;
+    width: 5.5rem;
+    height: 2rem;
+ 
+}
+.month {
+    background-color: limegreen;
+    display: flex;
+    position: absolute;
+    justify-content: center; 
+    align-items: center;
+    font-size: 1.3em;
+    color: black;
+    align-items: center;
+    top: 42%;
+    left: 15%;
+    border: 2px solid black;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    
+}
+
+.stand {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    background-color: blanchedalmond;
+    font-size:x-large;
+    font-weight:bold ;
+    top: 85%;
+    width: 35%;
+    height: 10%;
+    border: 3px solid rgb(255, 247, 0);
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 5px 5px 5px 5px rgba(255,255,255, 0.75);
+    text-decoration: underline;
+    
+}
+.madeBy {
+    position:absolute;
+    top: 62%;
+    left: 39%;
+}
+
+@media only screen and (max-width: 376px) {
+    .clock {
+        width: 275px;
+        height: 275px;
+        background-color: rgb(210, 209, 224);
+        border-radius: 50%;
+        border: 2px solid rgb(127, 110, 110);
+        position: relative;
+        /*margin: auto;*/
+    }
+    
+    .date {
+        position: absolute;
+        font-size: 1em;
+        color: black;
+        background-color: rgb(243, 196, 144);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 68%;
+        left: 40%;
+        border: 2px solid rgb(151, 61, 61);
+        border-radius: 50%;
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+    .month {
+        background-color: limegreen;
+        display: flex;
+        position: absolute;
+        justify-content: center; 
+        align-items: center;
+        font-size: 1em;
+        color: black;
+        align-items: center;
+        top: 42%;
+        left: 15%;
+        border: 2px solid black;
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+    }
+    .day {
+        background-color: rgb(239, 236, 207);
+        display: flex;
+        position: absolute;
+        justify-content: center;
+        align-items: center;
+        font-size: 1em;
+        width: 1em;
+        height: 1em;
+        color: black;
+        align-items: center;
+        top: 45%;
+        left: 60%;
+        border: 2px solid rgb(255, 0, 0);
+        border-radius: 10px;
+        width: 4.5rem;
+        height: 2rem;
+     
+    }
+    .am-pm {
+        position: absolute;
+        display: flex;
+        background-color: rgb(232, 19, 189);
+        justify-content: center;
+        align-items: center;
+        top: 20%;
+        left: 44%;
+        border: 2px solid black;
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+        
+    }
+    .stand {
+        display: flex;
+        box-sizing: border-box;
+        position: absolute;
+        align-items: center;
+        background-color: blanchedalmond;
+        font-weight:bold ;
+        top: 75%;
+        width: 70%;
+        height: 15%;
+        border: 3px solid rgb(255, 247, 0);
+        border-radius: 10px 10px 10px 10px;
+        
+    }
+    .madeBy {
+        position:absolute;
+        top: 60%;
+        left: 34%;
+    }
+}
